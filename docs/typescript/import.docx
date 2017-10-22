@@ -1,0 +1,34 @@
+﻿Import, mon précieux
+
+La fonction import est intégrée avec ECMASCRIPT 2015 - voir spécifications ECMAScript 2015 (6th Edition, ECMA-262) – et permet de modulariser des fichiers de scripts. Toutefois, cette fonction qui permet certes de modulariser du Javasciprt mais elle doit être Interprétée par des transpileurs tels Babel ou Webpack.
+
+De l’origine d’Import
+Parmis les equivalents connus nous avons CommonJS, solution présentant la modularisation avec gestion de dépendances en asynchrone mais résrvé à Node.JS. L’AMD (Asynchronous module definition) côté navigateur se nomme CommonJS (chouette !) mais la syntaxe en est verbeuse. 
+En revanche, le loader AMD éprouvé est RequireJS, solution présentant l’ensemble des atouts de notre fonction d’import à la différence qu’elle n’est pas native et de ce fait, une librairie doit être importer pour son usage.
+
+Quelques examples
+Plusieurs syntaxes sont porposées en fonciton du contenu du fichier à importer ou d ela façon dont le contenu sera manipulé :
+import defaultExport from "module-name";
+import * as name from "module-name";
+import { export } from "module-name";
+import { export as alias } from "module-name";
+import { export1 , export2 } from "module-name";
+import { export1 , export2 as alias2 , [...] } from "module-name";
+import defaultExport, { export [ , [...] ] } from "module-name";
+import defaultExport, * as name from "module-name";
+import "module-name";
+
+Le nom attribuer au script importer servira de namespace si c’est un fichier de fonctions, d’objet si le fichier importé exporte une classe.
+
+Directement intérprété dans le navigateur
+Sur les dernier navigateurs (Safari 10.1, Chrome Canary, Firefox 54 et Edge 15) cette fonction est directement interprétée dans le navigateur avec la gestion d’attributs tels 
+defer (le script n’est pas bloquant)
+<script defer> 
+	addTextToBody("Inline script executed"); 
+</script> 
+
+async (execution une fois l’import effectué)
+<script async type="module"> 
+	import {addTextToBody} from './utils.js'; 	addTextToBody('Inline module executed.'); 
+</script> 
+
